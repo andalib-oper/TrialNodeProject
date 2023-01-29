@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // Configuring the database
+require("dotenv")
+  .config();
 const mongoose = require('mongoose');
 const dbConfig = require('./config/database.config.js');
 
@@ -34,6 +36,7 @@ app.get('/', (req, res) => {
 
 // Require Notes routes
 require('./app/routes/note.routes.js')(app);
+require('./app/routes/user.routes.js')(app)
 
 // listen for requests
 app.listen(3500, () => {

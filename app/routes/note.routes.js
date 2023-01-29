@@ -1,11 +1,12 @@
 module.exports = (app) => {
     const notes = require('../controllers/note.controller.js');
-
+    const auth = require("../controllers/auth.controller.js");
+    const verifyToken = require('../middleware/authJWT.js');
     // Create a new Note
     app.post('/notes', notes.create);
 
     // Retrieve all Notes
-    app.get('/notes', notes.findAll);
+    app.get('/notes',[verifyToken.verifyToken], notes.findAll);
 
     // Retrieve a single Note with noteId
     app.get('/notes/:noteId', notes.findOne);

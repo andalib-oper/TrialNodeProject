@@ -90,7 +90,7 @@ exports.token = (req, res, user) => {
     if (req.user.role === "admin") {
         res.status(200)
             .send({
-                message: "Congratulations! but there is no hidden content"
+                message: "Congratulations! but there is no hidden content" 
             });
     } else {
         res.status(403)

@@ -66,7 +66,9 @@ exports.findOne = (req, res) => {
       res.send(note);
     })
     .catch((err) => {
+      console.log("69")
       if (err.kind === "ObjectId") {
+        console.log("71")
         return res.status(404).send({
           message: "Note not found with id " + req.params.noteId,
         });
@@ -76,6 +78,22 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+// find a single note with a note title
+exports.title = async (req, res)=>{
+  try {
+    const note = await (
+      await Note.find({title: req.params.title})
+    ).filter((note) => note.title===req.params.title);
+    res.json(note)
+  } catch (err) {
+    if (err) {
+      return res.status(400).json({
+        error: "Your request could not be processed. Please try again.",
+      });
+    }
+  }
+}
 
 // Update a note identified by the noteId in the request
 exports.update = (req, res) => {
